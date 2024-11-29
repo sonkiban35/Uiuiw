@@ -82,7 +82,7 @@ button:disabled {
 
 .seed-input {
   width: 80%; /* Adjust the percentage as needed */
-  max-width: 300px; /* Maximum width for larger screens */
+  max-width: 150px; /* Maximum width for larger screens */
   min-width: 150px; /* Minimum width for smaller screens */
   padding: 10px;
   margin: 5px auto; /* Center inputs in the grid */
