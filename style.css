@@ -81,7 +81,7 @@ button:disabled {
 }
 
 .seed-input {
-  width: 80%; /* Adjust the percentage as needed */
+  width: 100%; /* Adjust the percentage as needed */
   max-width: 150px; /* Maximum width for larger screens */
   min-width: 150px; /* Minimum width for smaller screens */
   padding: 7px;
@@ -96,5 +96,5 @@ button:disabled {
   display: flex;
   flex-wrap: wrap;
   justify-content: center; /* Center the input fields horizontally */
-  gap: 5px; /* Space between input fields */
+  gap: 2px; /* Space between input fields */
 }
