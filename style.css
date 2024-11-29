@@ -84,8 +84,8 @@ button:disabled {
   width: 80%; /* Adjust the percentage as needed */
   max-width: 150px; /* Maximum width for larger screens */
   min-width: 150px; /* Minimum width for smaller screens */
-  padding: 10px;
-  margin: 5px auto; /* Center inputs in the grid */
+  padding: 7px;
+  margin: 3px auto; /* Center inputs in the grid */
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
@@ -96,5 +96,5 @@ button:disabled {
   display: flex;
   flex-wrap: wrap;
   justify-content: center; /* Center the input fields horizontally */
-  gap: 10px; /* Space between input fields */
+  gap: 5px; /* Space between input fields */
 }
