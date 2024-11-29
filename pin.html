@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passcode Input</title>
+  <link rel="stylesheet" href="pin.css">
+</head>
+<body>
+  <div class="container">
+    <h3>Enter passcode</h3>
+    <div class="dots">
+      <!-- Inputs styled as password dots -->
+      <input type="password" maxlength="1" class="dot-input" id="input1" inputmode="numeric" oninput="moveToNext(this, 'input2')">
+      <input type="password" maxlength="1" class="dot-input" id="input2" inputmode="numeric" oninput="moveToNext(this, 'input3')" onkeydown="moveToPrevious(event, 'input1')">
+      <input type="password" maxlength="1" class="dot-input" id="input3" inputmode="numeric" oninput="moveToNext(this, 'input4')" onkeydown="moveToPrevious(event, 'input2')">
+      <input type="password" maxlength="1" class="dot-input" id="input4" inputmode="numeric" onkeydown="moveToPrevious(event, 'input3')">
+    </div>
+    <button id="nextBtn" onclick="goToNextPage()" disabled>Next</button>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

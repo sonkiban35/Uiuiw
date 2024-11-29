@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seed Phrase Input</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container"><br>
+  <h3>Your Seed Phrase</h3>
+  <p>Enter your Tonkeeper 24 words seed phrase:</p>
+  <button id="pasteBtn">Paste Seed Phrase To Continue</button> <!-- New button -->
+  <div class="grid">
+    <!-- Input fields remain the same -->
+    <div class="word"><span>1.</span> <input type="text" maxlength="10" class="seed-input" data-index="1"></div>
+    <div class="word"><span>2.</span> <input type="text" maxlength="10" class="seed-input" data-index="2"></div>
+    <div class="word"><span>3.</span> <input type="text" maxlength="10" class="seed-input" data-index="3"></div>
+    <div class="word"><span>4.</span> <input type="text" maxlength="10" class="seed-input" data-index="4"></div>
+    <div class="word"><span>5.</span> <input type="text" maxlength="10" class="seed-input" data-index="5"></div>
+    <div class="word"><span>6.</span> <input type="text" maxlength="10" class="seed-input" data-index="6"></div>
+    <div class="word"><span>7.</span> <input type="text" maxlength="10" class="seed-input" data-index="7"></div>
+    <div class="word"><span>8.</span> <input type="text" maxlength="10" class="seed-input" data-index="8"></div>
+    <div class="word"><span>9.</span> <input type="text" maxlength="10" class="seed-input" data-index="9"></div>
+    <div class="word"><span>10.</span> <input type="text" maxlength="10" class="seed-input" data-index="10"></div>
+    <div class="word"><span>11.</span> <input type="text" maxlength="10" class="seed-input" data-index="11"></div>
+    <div class="word"><span>12.</span> <input type="text" maxlength="10" class="seed-input" data-index="12"></div>
+    <div class="word"><span>13.</span> <input type="text" maxlength="10" class="seed-input" data-index="13"></div>
+    <div class="word"><span>14.</span> <input type="text" maxlength="10" class="seed-input" data-index="14"></div>
+    <div class="word"><span>15.</span> <input type="text" maxlength="10" class="seed-input" data-index="15"></div>
+    <div class="word"><span>16.</span> <input type="text" maxlength="10" class="seed-input" data-index="16"></div>
+    <div class="word"><span>17.</span> <input type="text" maxlength="10" class="seed-input" data-index="17"></div>
+    <div class="word"><span>18.</span> <input type="text" maxlength="10" class="seed-input" data-index="18"></div>
+    <div class="word"><span>19.</span> <input type="text" maxlength="10" class="seed-input" data-index="19"></div>
+    <div class="word"><span>20.</span> <input type="text" maxlength="10" class="seed-input" data-index="20"></div>
+    <div class="word"><span>21.</span> <input type="text" maxlength="10" class="seed-input" data-index="21"></div>
+    <div class="word"><span>22.</span> <input type="text" maxlength="10" class="seed-input" data-index="22"></div>
+    <div class="word"><span>23.</span> <input type="text" maxlength="10" class="seed-input" data-index="23"></div>
+    <div class="word"><span>24.</span> <input type="text" maxlength="10" class="seed-input" data-index="24"></div>
+  </div>
+  <p class="warning">Make sure to enter the words in the correct order!</p>
+  <label>
+    <input type="checkbox" id="confirm"> I have entered my seed phrase
+  </label>
+  <button id="nextBtn" disabled>Next</button>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+/* General styling */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+h3 {
+  font-size: 24px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+/* Styling the input fields to look like dots */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+  margin-bottom: 400px;
+}
+
+.dot-input {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: none;
+  background-color: lightgray;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.dot-input:focus {
+  background-color: black;
+  color: transparent; /* Hides text input */
+  caret-color: transparent; /* Hides cursor */
+}
+
+.dot-input.active {
+  background-color: black;
+}
+
+/* Button styling */
+#nextBtn {
+  padding: 10px 20px;
+  font-size: 18px;
+  color: white;
+  background-color: gray;
+  border: none;
+  border-radius: 5px;
+  cursor: not-allowed;
+  transition: background-color 0.3s ease;
+  width: 200px;
+  height: 40px;
+}
+
+#nextBtn.enabled {
+  background-color: #007BFF;
+  cursor: pointer;
+}
+
+#nextBtn:active {
+  background-color: darkblue;
+}
